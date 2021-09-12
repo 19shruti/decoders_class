@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int subarraysDivByK(vector<int>& nums, int k) {
+        unordered_map<int, int>m;
+        int sum=0;
+        int count=0;
+        //if the no. itself is present then sum=0 so for that m[0]++ increase the count
+        m[0]++;
+        for(int i=0;i<nums.size();i++) {
+           sum=(sum+nums[i])%k;
+            //in c++  modulo can return negative modulo . so add rem and modulo again 
+            sum=(sum+k)%k;
+            int temp=sum;    //to get positive correct modulo
+            if(m[temp]!=0)
+              count+=m[temp];
+            m[sum]++;
+        }
+        return count;
+    }
+};
